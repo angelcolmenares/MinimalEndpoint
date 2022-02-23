@@ -5,11 +5,14 @@ namespace MinimalEndpoint
 {
     public abstract class EndpointBase
     {
+        protected virtual Action<RouteHandlerBuilder> RouteHandlerBuilder { get; private set;} = (builder) => { };
+
         public delegate string RouteBuilderDelegate(Type endpointType);
 
         private static RouteBuilderDelegate? _routeBuilder;
 
         internal static RouteBuilderDelegate RouteBuilder { set => _routeBuilder = value; }
+
         protected abstract Delegate Handler { get; }
 
         protected virtual string Pattern =>
@@ -18,8 +21,8 @@ namespace MinimalEndpoint
         protected abstract EndpointMethod HttpMethod { get; }
 
         protected virtual RouteHandlerBuilder Map(IEndpointRouteBuilder endpoint)
-        =>
-            HttpMethod switch
+        {
+            var builder = HttpMethod switch
             {
                 EndpointMethod.Get => endpoint.MapGet(pattern: Pattern, handler: Handler),
                 EndpointMethod.Post => endpoint.MapPost(pattern: Pattern, handler: Handler),
@@ -28,8 +31,15 @@ namespace MinimalEndpoint
                 _ => throw new InvalidOperationException($"Invalid http method :{HttpMethod}")
             };
 
+            RouteHandlerBuilder?.Invoke(builder);
+            return builder;
+        }
+
         public void MapEndpoints(IEndpointRouteBuilder endpoint)
         => _ = Map(endpoint);
+
+
+        protected void Configure(Action<RouteHandlerBuilder> action) => RouteHandlerBuilder = action;
 
     }
 }
