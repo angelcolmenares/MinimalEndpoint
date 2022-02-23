@@ -1,6 +1,5 @@
-public class UpdateCustomerNameEndpoint : EndpointBase, IEndpoint
-{
-    protected override EndpointMethod HttpMethod => EndpointMethod.Put;
+public class UpdateCustomerNameEndpoint : EndpointBasePut, IEndpoint
+{    
     protected override string Pattern => base.Pattern + "/" + "{customerId:int}";
     protected override Delegate Handler => Handle;
 

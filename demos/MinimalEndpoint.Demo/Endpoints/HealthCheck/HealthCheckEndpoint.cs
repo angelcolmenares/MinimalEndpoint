@@ -1,9 +1,7 @@
 using System.Diagnostics;
 
-public class HealthCheckEndpoint : EndpointBase, IEndpoint
-{
-    protected override EndpointMethod HttpMethod => EndpointMethod.Get;
-
+public class HealthCheckEndpoint : EndpointBaseGet, IEndpoint
+{    
     protected override Delegate Handler =>
     (IWebHostEnvironment env) =>
     {

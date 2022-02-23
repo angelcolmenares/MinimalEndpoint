@@ -1,9 +1,7 @@
 namespace MinimalEndpoint.Demo.Endpoints.Customers.CreateCustomer
 {
-    public class CreateCustomerEndPoint : EndpointBase, IEndpoint
-    {
-
-        protected override EndpointMethod HttpMethod => EndpointMethod.Post;
+    public class CreateCustomerEndPoint : EndpointBasePost, IEndpoint
+    {        
         protected override Delegate Handler => Handle;
 
         protected override RouteHandlerBuilder Map(IEndpointRouteBuilder endpoint)

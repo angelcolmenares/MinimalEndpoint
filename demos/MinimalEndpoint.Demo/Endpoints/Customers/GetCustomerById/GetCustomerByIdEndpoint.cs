@@ -1,8 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 
-public class GetCustomerByIdEndpoint : EndpointBase, IEndpoint
+public class GetCustomerByIdEndpoint : EndpointBaseGet, IEndpoint
 {
-    protected override EndpointMethod HttpMethod => EndpointMethod.Get;
     protected override Delegate Handler => Handle;
 
     protected override string Pattern => base.Pattern + "/" + "{customerId:int}";
