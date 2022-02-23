@@ -6,12 +6,6 @@ namespace MinimalEndpoint
 {
     public abstract class EndpointBase
     {
-        static Regex r = new Regex(@"
-                (?<=[A-Z])(?=[A-Z][a-z]) |
-                 (?<=[^A-Z])(?=[A-Z]) |
-                 (?<=[A-Za-z])(?=[^A-Za-z])",
-                     RegexOptions.IgnorePatternWhitespace);
-
         public delegate string RouteBuilderDelegate(Type endpointType);
 
         private static RouteBuilderDelegate? _routeBuilder;
