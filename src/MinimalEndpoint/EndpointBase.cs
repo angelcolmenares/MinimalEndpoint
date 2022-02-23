@@ -39,7 +39,5 @@ namespace MinimalEndpoint
         => _ = Map(endpoint);
 
 
-        protected void Configure(Action<RouteHandlerBuilder> action) => RouteHandlerBuilder = action;
-
     }
 }
