@@ -1,26 +1,22 @@
-namespace MinimalEndpoint.Demo.Endpoints.Customers.CreateCustomer
+public class CreateCustomerEndPoint : EndpointBasePost, IEndpoint
 {
-    public class CreateCustomerEndPoint : EndpointBase, IEndpoint
-    {
+    protected override Delegate Handler => Handle;
 
-        protected override EndpointMethod HttpMethod => EndpointMethod.Post;
-        protected override Delegate Handler => Handle;
+    private async Task<IResult> Handle(
+        HttpContext httpContext,
+        CreateCustomerRequest request)
+    =>
+        await Task.FromResult(
+            Results.Ok(
+                new CreateCustomerResponse
+                {
+                    CustomerId = 1000
+                }
+            )
+        );
 
-        protected override RouteHandlerBuilder Map(IEndpointRouteBuilder endpoint)
-        {
-            return base.Map(endpoint).Produces<CreateCustomerResponse>();
-        }
+    protected override Action<RouteHandlerBuilder> RouteHandlerBuilder
+    => Configure;
 
-        private async Task<IResult> Handle(
-            HttpContext httpContext,
-            CreateCustomerRequest request)
-        {
-            await Task.CompletedTask;
-            return Results.Ok(
-               new CreateCustomerResponse
-               {
-                   CustomerId = 1000
-               });
-        }
-    }
+    private void Configure(RouteHandlerBuilder builder) => builder.Produces<CreateCustomerResponse>();
 }

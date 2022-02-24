@@ -9,18 +9,27 @@ namespace MinimalEndpoint
 
         public static WebApplication MapEndpointsFromCurrentAssembly(
             this WebApplication app,
+            string? patternPrefix = null,
             RouteBuilderDelegate? routeBuilderDelegate = null)
         {
             var assembly = Assembly.GetCallingAssembly();
-            return MapEndpointsFromAssembly(app, assembly, routeBuilderDelegate);
+            return MapEndpointsFromAssembly(app, assembly, patternPrefix, routeBuilderDelegate);
         }
 
         public static WebApplication MapEndpointsFromAssembly(
             this WebApplication app,
             Assembly assembly,
+            string? patternPrefix = null,
             RouteBuilderDelegate? routeBuilderDelegate = null)
         {
-            EndpointBase.RouteBuilder = routeBuilderDelegate ?? DefaultRouteBuilder.Build;
+            var normalizedPatternPrefix =
+            (!string.IsNullOrEmpty(patternPrefix) ? patternPrefix : "")
+            .Trim('/');
+
+            EndpointBase.RouteBuilder = (t)
+            =>
+            normalizedPatternPrefix + "/" + (routeBuilderDelegate ?? DefaultRouteBuilder.Build).Invoke(t);
+
             var modules = DiscoverEndpoints(assembly);
 
             foreach (var module in modules)
