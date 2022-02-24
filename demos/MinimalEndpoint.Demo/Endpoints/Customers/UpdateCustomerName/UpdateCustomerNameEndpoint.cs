@@ -1,6 +1,6 @@
 public class UpdateCustomerNameEndpoint : EndpointBasePut, IEndpoint
 {    
-    protected override string Pattern => base.Pattern + "/" + "{customerId:int}";
+    protected override string ParametersTemplate => "{customerId:int}";
     protected override Delegate Handler => Handle;
 
     private async Task<IResult> Handle(

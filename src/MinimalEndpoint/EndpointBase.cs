@@ -5,7 +5,7 @@ namespace MinimalEndpoint
 {
     public abstract class EndpointBase
     {
-        protected virtual Action<RouteHandlerBuilder> RouteHandlerBuilder { get; private set;} = (builder) => { };
+        protected virtual Action<RouteHandlerBuilder> RouteHandlerBuilder { get; private set; } = (builder) => { };
 
         public delegate string RouteBuilderDelegate(Type endpointType);
 
@@ -16,7 +16,11 @@ namespace MinimalEndpoint
         protected abstract Delegate Handler { get; }
 
         protected virtual string Pattern =>
-         "/" + _routeBuilder?.Invoke(GetType()) ?? "";
+         "/" 
+         + ((_routeBuilder?.Invoke(GetType()) ?? "").Trim('/'))
+         + (!string.IsNullOrEmpty(ParametersTemplate) ? "/"+ ParametersTemplate.Trim('/') : "" );
+
+        protected virtual string ParametersTemplate => "";
 
         protected abstract EndpointMethod HttpMethod { get; }
 
