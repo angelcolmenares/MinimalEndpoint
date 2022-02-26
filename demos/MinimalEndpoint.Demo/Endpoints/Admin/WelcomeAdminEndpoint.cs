@@ -1,8 +1,8 @@
 namespace MinimalEndpoint.Demo.Endpoints.Admin;
 
-public class AdminEndpoint : EndpointBaseGet, IEndpoint
+public class WelcomeAdminEndpoint : EndpointBaseGet, IEndpoint
 {
-    public AdminEndpoint()=> RequireAuthorization("AdminsOnly");
+    public WelcomeAdminEndpoint()=> RequireAuthorization("AdminsOnly");
     protected override Delegate Handler => 
     (HttpContext httpContext )=>
     {

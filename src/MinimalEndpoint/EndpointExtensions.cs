@@ -20,7 +20,9 @@ namespace MinimalEndpoint
             this WebApplication app,
             Assembly assembly,
             string? patternPrefix = null,
-            RouteBuilderDelegate? routeBuilderDelegate = null)
+            RouteBuilderDelegate? routeBuilderDelegate = null,
+            string endpointsNamespace = "Endpoints",
+            TagBuilderDelegate? tagBuilderDelegate = null)
         {
             var normalizedPatternPrefix =
             (!string.IsNullOrEmpty(patternPrefix) ? patternPrefix : "")
@@ -29,6 +31,12 @@ namespace MinimalEndpoint
             EndpointBase.RouteBuilder = (t)
             =>
             normalizedPatternPrefix + "/" + (routeBuilderDelegate ?? DefaultRouteBuilder.Build).Invoke(t);
+
+            EndpointBase.EndpointsNamespace = endpointsNamespace;
+
+            EndpointBase.TagBuilder = (t, ns)
+            => (tagBuilderDelegate ?? DefaultTagBuilder.Build).Invoke(t, ns);
+
 
             var modules = DiscoverEndpoints(assembly);
 

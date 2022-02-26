@@ -7,10 +7,8 @@ namespace MinimalEndpoint.Demo.Endpoints.Login;
 public class LoginEndpoint : EndpointBasePost, IEndpoint
 {
     public LoginEndpoint()
-    {
+    =>
         AllowAnonymous();
-        WithTags("MinimalEndpoint.Demo");
-    }
 
     protected override Delegate Handler => Handle;
 

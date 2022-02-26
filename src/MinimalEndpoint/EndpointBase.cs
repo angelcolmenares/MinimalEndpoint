@@ -7,13 +7,20 @@ namespace MinimalEndpoint
 {
     public abstract class EndpointBase
     {
-        private const string RequireAuthorizationKey= "RequireAuthorization";
+        private const string RequireAuthorizationKey = "RequireAuthorization";
         protected EndpointBase()
         {
-            actions.Add( RequireAuthorizationKey, b=> b.RequireAuthorization());
+            actions.Add(RequireAuthorizationKey, b => b.RequireAuthorization());
+            if( _tagBuilder is not null)
+            {
+                actions["WithTags"]= b=> b.WithTags( _tagBuilder.Invoke(GetType(),EndpointsNamespace)); 
+            }   
         }
+
         private Dictionary<string, Action<RouteHandlerBuilder>> actions = new Dictionary<string, Action<RouteHandlerBuilder>>();
+
         protected virtual Action<RouteHandlerBuilder> RouteHandlerBuilder { get; private set; } = (builder) => { };
+
 
         public delegate string RouteBuilderDelegate(Type endpointType);
 
@@ -21,12 +28,20 @@ namespace MinimalEndpoint
 
         internal static RouteBuilderDelegate RouteBuilder { set => _routeBuilder = value; }
 
+
+        public delegate string TagBuilderDelegate(Type endpointType, string endpointsNamespace);
+
+        private static TagBuilderDelegate? _tagBuilder;
+
+        internal static TagBuilderDelegate TagBuilder { set => _tagBuilder = value; }
+        internal static string EndpointsNamespace { get;set;} = "Endpoints";
+
         protected abstract Delegate Handler { get; }
 
         protected virtual string Pattern =>
-         "/" 
+         "/"
          + ((_routeBuilder?.Invoke(GetType()) ?? "").Trim('/'))
-         + (!string.IsNullOrEmpty(ParametersTemplate) ? "/"+ ParametersTemplate.Trim('/') : "" );
+         + (!string.IsNullOrEmpty(ParametersTemplate) ? "/" + ParametersTemplate.Trim('/') : "");
 
         protected virtual string ParametersTemplate => "";
 
@@ -44,7 +59,7 @@ namespace MinimalEndpoint
             };
 
             RouteHandlerBuilder?.Invoke(builder);
-            foreach(var (_, action) in actions)
+            foreach (var (_, action) in actions)
             {
                 action.Invoke(builder);
             }
@@ -53,53 +68,53 @@ namespace MinimalEndpoint
 
         protected void AllowAnonymous()
         =>
-            actions[RequireAuthorizationKey]=( b=> b.AllowAnonymous());
-          
+            actions[RequireAuthorizationKey] = (b => b.AllowAnonymous());
+
 
         protected void RequireAuthorization()
         =>
-            actions[RequireAuthorizationKey]= b=> b.RequireAuthorization();
-          
+            actions[RequireAuthorizationKey] = b => b.RequireAuthorization();
+
 
         protected void RequireAuthorization(params string[] policyNames)
         =>
-            actions[RequireAuthorizationKey]= b=> b.RequireAuthorization(policyNames);
-          
+            actions[RequireAuthorizationKey] = b => b.RequireAuthorization(policyNames);
+
 
         protected void RequireAuthorization(params IAuthorizeData[] authorizeData)
         =>
-            actions[RequireAuthorizationKey]= b=> b.RequireAuthorization(authorizeData);
-          
+            actions[RequireAuthorizationKey] = b => b.RequireAuthorization(authorizeData);
+
 
         protected void Produces<TResponse>(
             int statusCode = 200,
             string? contentType = null,
             params string[] additionalContentTypes)
         =>
-            Produces(statusCode, typeof(TResponse),  contentType, additionalContentTypes);
-          
+            Produces(statusCode, typeof(TResponse), contentType, additionalContentTypes);
+
 
         protected void Produces(
             int statusCode = 200,
-            Type? responseType=null,            
+            Type? responseType = null,
             string? contentType = null,
             params string[] additionalContentTypes)
         =>
-            actions[$"Produces_{statusCode}"]= b=> b.Produces(statusCode, responseType,contentType, additionalContentTypes );
+            actions[$"Produces_{statusCode}"] = b => b.Produces(statusCode, responseType, contentType, additionalContentTypes);
 
         protected void WithTags(params string[] tags)
         =>
-            actions["WithTags"]= b=> b.WithTags(tags);
+            actions["WithTags"] = b => b.WithTags(tags);
 
 
-       /* protected void WithDisplayName(string displayName)
-        =>
-            actions["WithDisplayName"]= b=> b.WithDisplayName(displayName);
-          
-        protected void WithGroupName(string endpointGroupName)
-        =>
-            actions["WithGroupName"]= b=> b.WithGroupName(endpointGroupName);*/
-            
+        /* protected void WithDisplayName(string displayName)
+         =>
+             actions["WithDisplayName"]= b=> b.WithDisplayName(displayName);
+
+         protected void WithGroupName(string endpointGroupName)
+         =>
+             actions["WithGroupName"]= b=> b.WithGroupName(endpointGroupName);*/
+
 
         public void MapEndpoints(IEndpointRouteBuilder endpoint)
         => _ = Map(endpoint);

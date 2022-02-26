@@ -1,3 +1,4 @@
+namespace MinimalEndpoint.Demo.Endpoints.Customers.UpdateCustomerName;
 public class UpdateCustomerNameEndpoint : EndpointBasePut, IEndpoint
 {    
     protected override string ParametersTemplate => "{customerId:int}";

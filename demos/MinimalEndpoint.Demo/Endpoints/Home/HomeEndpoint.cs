@@ -1,3 +1,4 @@
+namespace MinimalEndpoint.Demo.Endpoints.Home;
 public class HomeEndpoint : EndpointBaseGet, IEndpoint
 {
     public HomeEndpoint()=> AllowAnonymous();

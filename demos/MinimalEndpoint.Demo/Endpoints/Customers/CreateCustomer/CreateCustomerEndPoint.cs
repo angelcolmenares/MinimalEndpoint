@@ -1,6 +1,7 @@
-public class CreateCustomerEndPoint : EndpointBasePost, IEndpoint
+namespace MinimalEndpoint.Demo.Endpoints.Customers.CreateCustomer;
+public class CreateCustomerEndpoint : EndpointBasePost, IEndpoint
 {
-    public CreateCustomerEndPoint()=> Produces<CreateCustomerResponse>();
+    public CreateCustomerEndpoint()=> Produces<CreateCustomerResponse>();
     
     protected override Delegate Handler => Handle;
 

@@ -1,3 +1,4 @@
+namespace MinimalEndpoint.Demo.Endpoints.Customers.GetCustomerById;
 public class GetCustomerByIdEndpoint : EndpointBaseGet, IEndpoint
 {
     protected override Delegate Handler => Handle;
