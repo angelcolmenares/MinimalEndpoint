@@ -86,6 +86,10 @@ namespace MinimalEndpoint
             params string[] additionalContentTypes)
         =>
             actions["Produces"]= b=> b.Produces(statusCode, responseType,contentType, additionalContentTypes );
+
+        protected void WithTags(string tags)
+        =>
+            actions["WithTags"]= b=> b.WithTags(tags);
             
 
        /* protected void WithDisplayName(string displayName)
