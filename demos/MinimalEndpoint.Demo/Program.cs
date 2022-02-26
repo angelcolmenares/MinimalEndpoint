@@ -1,9 +1,14 @@
+using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddAuthorization();
+builder.Services.AddAuthorization( o =>
+{
+    o.AddPolicy("AdminsOnly", b => b.RequireClaim( ClaimTypes.Role,"admin"));
+});
+
 builder.Services
 .AddAuthentication(o =>
 {
@@ -13,6 +18,7 @@ builder.Services
 .AddCookie(options =>
 {
     options.LoginPath = "/fake-login-page";
+    options.AccessDeniedPath="/access-denied";
 });
 
 

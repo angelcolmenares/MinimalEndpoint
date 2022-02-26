@@ -14,15 +14,13 @@ public class LoginEndpoint : EndpointBasePost, IEndpoint
         HttpContext httpContext,
         LoginRequest request)
     {
-        var userName = request.UserName?.ToLower() ?? "Anonymous";
+        var userName = request.UserName ?? "anonymous";
+        var isAdmin = userName.ToLower()=="admin" || userName.ToLower().Contains("admin") ;
         var claims = new List<Claim>
-            {
-                new Claim( ClaimTypes.Name, userName),
-                new Claim("FullName", userName),
-                new Claim(
-                    ClaimTypes.Role,
-                    ( userName=="admin" || userName.Contains("admin") )?"Administrator": "User"),
-            };
+        {
+            new Claim( ClaimTypes.Name, userName),
+            new Claim( ClaimTypes.Role, ( isAdmin?"admin": "user")),
+        };
 
         var claimsIdentity = new ClaimsIdentity(
             claims, CookieAuthenticationDefaults.AuthenticationScheme);
