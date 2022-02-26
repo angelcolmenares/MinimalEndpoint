@@ -1,5 +1,3 @@
-using Microsoft.AspNetCore.Mvc;
-
 public class GetCustomerByIdEndpoint : EndpointBaseGet, IEndpoint
 {
     protected override Delegate Handler => Handle;

@@ -5,7 +5,7 @@
     <ProjectType>Library</ProjectType>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-     <IsPackable>true</IsPackable>
+    <IsPackable>true</IsPackable>
     <PackageId>MinimalEndpoint</PackageId>
     <!--  <PackageIcon>icon.png</PackageIcon> -->
     <PackageProjectUrl>https://github.com/angelcolmenares/MinimalEndpoint</PackageProjectUrl>

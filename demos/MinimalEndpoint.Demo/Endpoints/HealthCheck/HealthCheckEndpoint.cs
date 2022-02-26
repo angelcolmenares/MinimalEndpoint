@@ -1,7 +1,11 @@
 using System.Diagnostics;
 
 public class HealthCheckEndpoint : EndpointBaseGet, IEndpoint
-{    
+{
+    public HealthCheckEndpoint()
+    {
+        AllowAnonymous();
+    }    
     protected override Delegate Handler =>
     (IWebHostEnvironment env) =>
     {

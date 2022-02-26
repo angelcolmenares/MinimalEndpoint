@@ -1,5 +1,7 @@
 public class CreateCustomerEndPoint : EndpointBasePost, IEndpoint
 {
+    public CreateCustomerEndPoint()=> Produces<CreateCustomerResponse>();
+    
     protected override Delegate Handler => Handle;
 
     private async Task<IResult> Handle(
@@ -15,8 +17,4 @@ public class CreateCustomerEndPoint : EndpointBasePost, IEndpoint
             )
         );
 
-    protected override Action<RouteHandlerBuilder> RouteHandlerBuilder
-    => Configure;
-
-    private void Configure(RouteHandlerBuilder builder) => builder.Produces<CreateCustomerResponse>();
 }
