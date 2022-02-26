@@ -76,7 +76,7 @@ namespace MinimalEndpoint
             string? contentType = null,
             params string[] additionalContentTypes)
         =>
-            actions["Produces"]= b=> b.Produces<TResponse>(statusCode, contentType, additionalContentTypes);
+            Produces(typeof(TResponse), statusCode, contentType, additionalContentTypes);
           
 
         protected void Produces(
@@ -85,7 +85,7 @@ namespace MinimalEndpoint
             string? contentType = null,
             params string[] additionalContentTypes)
         =>
-            actions["Produces"]= b=> b.Produces(statusCode, responseType,contentType, additionalContentTypes );
+            actions[$"Produces_{statusCode}"]= b=> b.Produces(statusCode, responseType,contentType, additionalContentTypes );
 
         protected void WithTags(string tags)
         =>
