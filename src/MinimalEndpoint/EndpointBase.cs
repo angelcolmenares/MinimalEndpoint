@@ -76,21 +76,21 @@ namespace MinimalEndpoint
             string? contentType = null,
             params string[] additionalContentTypes)
         =>
-            Produces(typeof(TResponse), statusCode, contentType, additionalContentTypes);
+            Produces(statusCode, typeof(TResponse),  contentType, additionalContentTypes);
           
 
         protected void Produces(
-            Type responseType,
             int statusCode = 200,
+            Type? responseType=null,            
             string? contentType = null,
             params string[] additionalContentTypes)
         =>
             actions[$"Produces_{statusCode}"]= b=> b.Produces(statusCode, responseType,contentType, additionalContentTypes );
 
-        protected void WithTags(string tags)
+        protected void WithTags(params string[] tags)
         =>
             actions["WithTags"]= b=> b.WithTags(tags);
-            
+
 
        /* protected void WithDisplayName(string displayName)
         =>
