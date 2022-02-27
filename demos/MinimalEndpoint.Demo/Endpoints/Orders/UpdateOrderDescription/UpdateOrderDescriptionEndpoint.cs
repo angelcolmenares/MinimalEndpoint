@@ -1,7 +1,7 @@
 namespace MinimalEndpoint.Demo.Endpoints.Orders.UpdateOrderDescription;
 
 public class UpdateOrderDescriptionEndpoint : 
-EndpointBasePostWith<
+EndpointPutWith<
 UpdateOrdeDescriptionRequest, 
 IResult, 
 IUpdateOrderDescriptionService>, IEndpoint
@@ -15,6 +15,8 @@ IUpdateOrderDescriptionService>, IEndpoint
         CancellationToken cancellationToken=default)
     {
         await service.Handle(request, cancellationToken);
-        return Results.Ok();
+        return Results.NoContent();
     }
 }
+
+
