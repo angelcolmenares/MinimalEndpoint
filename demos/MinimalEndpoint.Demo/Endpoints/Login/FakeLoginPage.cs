@@ -1,6 +1,6 @@
 namespace MinimalEndpoint.Demo.Endpoints.Login;
 
-public class FakeLoginPage : EndpointBaseGet, IEndpoint
+public class FakeLoginPage : EndpointGet, IEndpoint
 {
     public FakeLoginPage()
     { 

@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MinimalEndpoint.Demo.Endpoints.Home;
 
-public class FooEndpoint : EndpointBaseGet, IEndpoint
+public class FooEndpoint : EndpointGet, IEndpoint
 {
     public FooEndpoint() => AllowAnonymous();
     protected override Delegate Handler =>

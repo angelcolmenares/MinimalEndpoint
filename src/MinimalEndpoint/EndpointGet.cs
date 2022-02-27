@@ -1,6 +1,6 @@
 namespace MinimalEndpoint
 {
-    public abstract class EndpointBaseGet:EndpointBase
+    public abstract class EndpointGet:EndpointBase
     {
         protected override EndpointMethod HttpMethod => EndpointMethod.Get;
     }

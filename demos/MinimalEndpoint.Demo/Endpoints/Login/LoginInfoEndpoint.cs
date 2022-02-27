@@ -2,7 +2,7 @@ using System.Security.Claims;
 
 namespace MinimalEndpoint.Demo.Endpoints.Login;
 
-public class LoginInfoEndpoint : EndpointBaseGet, IEndpoint
+public class LoginInfoEndpoint : EndpointGet, IEndpoint
 {
     public LoginInfoEndpoint()
     {

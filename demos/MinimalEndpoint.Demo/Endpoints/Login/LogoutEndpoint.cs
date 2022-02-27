@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace MinimalEndpoint.Demo.Endpoints.Login;
 
-public class LogoutEndpoint : EndpointBasePost, IEndpoint
+public class LogoutEndpoint : EndpointPost, IEndpoint
 {
     protected override Delegate Handler =>
     async (HttpContext httpContext) => 

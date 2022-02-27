@@ -1,5 +1,5 @@
 namespace MinimalEndpoint.Demo.Endpoints.Customers.CreateCustomer;
-public class CreateCustomerEndpoint : EndpointBasePost, IEndpoint
+public class CreateCustomerEndpoint : EndpointPost, IEndpoint
 {
     public CreateCustomerEndpoint()=> Produces<CreateCustomerResponse>();
     

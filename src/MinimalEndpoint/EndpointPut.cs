@@ -1,6 +1,6 @@
 namespace MinimalEndpoint
 {
-    public abstract class EndpointBasePut: EndpointBase
+    public abstract class EndpointPut: EndpointBase
     {
         protected override EndpointMethod HttpMethod => EndpointMethod.Put;
     }
