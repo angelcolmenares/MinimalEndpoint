@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Mvc;
+
 namespace MinimalEndpoint.Demo.Endpoints.Home;
 
 public class FooEndpoint : EndpointBaseGet, IEndpoint
@@ -10,4 +12,8 @@ public class FooEndpoint : EndpointBaseGet, IEndpoint
     };
 }
 
-
+public 
+class FooRequest
+{
+    [FromQuery] public string Name {get;set;}= string.Empty;
+}
