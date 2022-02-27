@@ -2,6 +2,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using MinimalEndpoint.Demo.Endpoints.Orders.CreateOrder;
 using MinimalEndpoint.Demo.Endpoints.Orders.DeleteOrder;
+using MinimalEndpoint.Demo.Endpoints.Orders.GetOrderById;
 using MinimalEndpoint.Demo.Endpoints.Orders.UpdateOrderDescription;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -32,6 +33,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<ICreateOrderService, CreateOrderService>();
 builder.Services.AddTransient<IUpdateOrderDescriptionService,UpdateOrderDescriptionService>();
 builder.Services.AddTransient<IDeleteOrderService,DeleteOrderService>();
+builder.Services.AddTransient<IGetOrderByIdService,GetOrderByIdService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
