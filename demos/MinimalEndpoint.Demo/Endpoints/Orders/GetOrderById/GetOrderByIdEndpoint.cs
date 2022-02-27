@@ -1,7 +1,7 @@
 namespace MinimalEndpoint.Demo.Endpoints.Orders.GetOrderById;
 
 public class GetOrderByIdEndpoint :
-EndpointGetWith<
+EndpointGet<
 string,
 GetOrderByIdResponse,
 IGetOrderByIdService>,

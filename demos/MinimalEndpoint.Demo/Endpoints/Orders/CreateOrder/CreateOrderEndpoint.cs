@@ -1,7 +1,7 @@
 namespace MinimalEndpoint.Demo.Endpoints.Orders.CreateOrder;
 
 public class CreateOrderEndpoint :
-EndpointPostWith<
+EndpointPost<
 CreateOrderRequest, 
 CreateOrderResponse, 
 ICreateOrderService>, 

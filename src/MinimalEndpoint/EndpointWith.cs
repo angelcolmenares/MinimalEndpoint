@@ -2,9 +2,9 @@ using Microsoft.AspNetCore.Http;
 
 namespace MinimalEndpoint;
 
-public abstract class EndpointWith<TRequest, TResponse, TService> : EndpointBase
+public abstract class Endpoint<TRequest, TResponse, TService> : EndpointBase
 {
-    protected EndpointWith()
+    protected Endpoint()
     {
         if (typeof(TResponse) != typeof(IResult))
         {

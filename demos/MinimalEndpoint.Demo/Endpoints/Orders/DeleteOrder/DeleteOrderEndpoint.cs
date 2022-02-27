@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace MinimalEndpoint.Demo.Endpoints.Orders.DeleteOrder;
 
 public class DeleteOrderEndpoint :
- EndpointDeleteWith<
+ EndpointDelete<
  DeleteOrderRequest, 
  IResult, 
  IDeleteOrderService>,

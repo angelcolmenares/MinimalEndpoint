@@ -1,7 +1,7 @@
 namespace MinimalEndpoint.Demo.Endpoints.Orders.UpdateOrderDescription;
 
 public class UpdateOrderDescriptionEndpoint : 
-EndpointPutWith<
+EndpointPut<
 UpdateOrdeDescriptionRequest, 
 IResult, 
 IUpdateOrderDescriptionService>, IEndpoint

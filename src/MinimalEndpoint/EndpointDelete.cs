@@ -1,7 +1,6 @@
-namespace MinimalEndpoint
+namespace MinimalEndpoint;
+
+public abstract class EndpointDelete : EndpointBase
 {
-    public abstract class EndpointDelete:EndpointBase
-    {
-        protected override EndpointMethod HttpMethod => EndpointMethod.Delete;
-    }
+    protected override EndpointMethod HttpMethod => EndpointMethod.Delete;
 }

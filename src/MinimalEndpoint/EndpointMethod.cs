@@ -1,10 +1,9 @@
-namespace MinimalEndpoint
+namespace MinimalEndpoint;
+
+public enum EndpointMethod
 {
-    public enum EndpointMethod
-    {
-        Get,
-        Post,
-        Put,
-        Delete
-    }
+    Get,
+    Post,
+    Put,
+    Delete
 }

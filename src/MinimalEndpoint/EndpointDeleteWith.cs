@@ -1,7 +1,7 @@
 namespace MinimalEndpoint;
 
-public abstract class EndpointDeleteWith<TRequest, TResponse, TService> :
-EndpointWith<TRequest, TResponse, TService>
+public abstract class EndpointDelete<TRequest, TResponse, TService> :
+Endpoint<TRequest, TResponse, TService>
 {
     protected override abstract RequestDelegate RequestHandler { get; }
 

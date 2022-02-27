@@ -1,7 +1,7 @@
 namespace MinimalEndpoint;
 
-public abstract class EndpointPutWith<TRequest, TResponse, TService> :
-EndpointWith<TRequest, TResponse, TService>
+public abstract class EndpointPut<TRequest, TResponse, TService> :
+Endpoint<TRequest, TResponse, TService>
 {
     protected override abstract RequestDelegate RequestHandler { get; }
 
