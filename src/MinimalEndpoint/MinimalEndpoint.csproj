@@ -10,6 +10,7 @@
     <!--  <PackageIcon>icon.png</PackageIcon> -->
     <PackageProjectUrl>https://github.com/angelcolmenares/MinimalEndpoint</PackageProjectUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageTags>dotnet, net6.0, minimal api</PackageTags>
 
     <MinVerTagPrefix>v</MinVerTagPrefix>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
