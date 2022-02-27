@@ -1,7 +1,6 @@
-namespace MinimalEndpoint.Demo.Endpoints.Orders.GetOrderById
+namespace MinimalEndpoint.Demo.Endpoints.Orders.GetOrderById;
+
+public class GetOrderByIdRequest
 {
-    public class GetOrderByIdRequest
-    {
-            public string Id { get; init; } = string.Empty;
-    }
+    public string Id { get; init; } = string.Empty;
 }

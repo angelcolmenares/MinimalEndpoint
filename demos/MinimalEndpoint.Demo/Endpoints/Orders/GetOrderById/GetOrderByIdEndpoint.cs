@@ -1,8 +1,10 @@
+using MinimalApis.Extensions.Binding;
+
 namespace MinimalEndpoint.Demo.Endpoints.Orders.GetOrderById;
 
 public class GetOrderByIdEndpoint :
 EndpointGet<
-string,
+ModelBinder<GetOrderByIdRequest>,
 GetOrderByIdResponse,
 IGetOrderByIdService>,
 IEndpoint
@@ -11,13 +13,17 @@ IEndpoint
     protected override RequestDelegate RequestHandler => Handle;
 
     private async Task<GetOrderByIdResponse> Handle(
-        string id,
+        ModelBinder<GetOrderByIdRequest> request,
         HttpContext httpContext,
         IGetOrderByIdService service,
         CancellationToken cancellationToken)
     {
+        if( request.Model is null)
+        {
+            throw new ArgumentNullException(nameof(request));
+        }
         var results=await service.Handle(
-            new GetOrderByIdRequest { Id = id }, 
+            request.Model, 
             cancellationToken);
         return results;
     }

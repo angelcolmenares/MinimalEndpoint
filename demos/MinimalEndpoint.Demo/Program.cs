@@ -1,5 +1,7 @@
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using MinimalApis.Extensions.Binding;
+using MinimalEndpoint.Demo.Endpoints.Orders.GetOrderById;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +29,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddOrdersServices();
 
+builder.Services.AddMvcCore();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -37,6 +40,8 @@ app.UseSwaggerUI();
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.MapGet("test", ( ModelBinder<GetOrderByIdRequest> request)=> request.Model);
 
 app.MapEndpointsFromCurrentAssembly();
 
