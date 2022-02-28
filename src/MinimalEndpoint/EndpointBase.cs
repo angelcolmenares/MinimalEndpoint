@@ -37,6 +37,7 @@ public abstract class EndpointBase
     internal static string EndpointsNamespace { get; set; } = "Endpoints";
 
     protected abstract Delegate Handler { get; }
+    protected virtual Delegate? FinalRequestHandler {get;}
 
     protected virtual string Pattern =>
      "/"
@@ -51,10 +52,10 @@ public abstract class EndpointBase
     {
         var builder = HttpMethod switch
         {
-            EndpointMethod.Get => endpoint.MapGet(pattern: Pattern, handler: Handler),
-            EndpointMethod.Post => endpoint.MapPost(pattern: Pattern, handler: Handler),
-            EndpointMethod.Put => endpoint.MapPut(pattern: Pattern, handler: Handler),
-            EndpointMethod.Delete => endpoint.MapDelete(pattern: Pattern, handler: Handler),
+            EndpointMethod.Get => endpoint.MapGet(pattern: Pattern, handler: FinalRequestHandler?? Handler),
+            EndpointMethod.Post => endpoint.MapPost(pattern: Pattern, handler: FinalRequestHandler?? Handler),
+            EndpointMethod.Put => endpoint.MapPut(pattern: Pattern, handler: FinalRequestHandler?? Handler),
+            EndpointMethod.Delete => endpoint.MapDelete(pattern: Pattern, handler: FinalRequestHandler?? Handler),
             _ => throw new InvalidOperationException($"Invalid http method :{HttpMethod}")
         };
 

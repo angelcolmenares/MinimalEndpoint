@@ -22,4 +22,27 @@ public abstract class Endpoint<TRequest, TResponse, TService> : EndpointBase
     protected override Delegate Handler => RequestHandler;
 
     protected override abstract EndpointMethod HttpMethod { get; }
+
+    protected override RequestDelegate FinalRequestHandler =>async (
+        TRequest request,
+        HttpContext httpContext,
+        TService services,
+        CancellationToken cancellationToken)=>
+        {
+            IServiceBehavior<TService>? c = (IServiceBehavior<TService>?) httpContext
+            .RequestServices
+            .GetService(typeof(IServiceBehavior<TService>));
+            if( c is not null)
+            {
+                await c.ExecuteBefore(request);
+            }
+
+            var response= await RequestHandler.Invoke(request, httpContext, services, cancellationToken);
+
+            if( c is not null)
+            {
+                await c.ExecuteAfter(request,response);
+            }
+            return response;
+        };
 }
