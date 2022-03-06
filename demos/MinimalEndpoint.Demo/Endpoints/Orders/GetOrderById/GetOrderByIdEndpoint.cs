@@ -6,9 +6,7 @@ public class GetOrderByIdEndpoint :
 EndpointGet<
 ModelBinder<GetOrderByIdRequest>,
 GetOrderByIdResponse,
-IGetOrderByIdService>,
-IEndpoint
-
+IGetOrderByIdService>
 {
     protected override RequestDelegate RequestHandler => Handle;
 

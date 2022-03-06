@@ -1,5 +1,5 @@
 namespace MinimalEndpoint.Demo.Endpoints.Customers.GetCustomerById;
-public class GetCustomerByIdEndpoint : EndpointGet, IEndpoint
+public class GetCustomerByIdEndpoint : EndpointGet
 {
     protected override Delegate Handler => Handle;
 

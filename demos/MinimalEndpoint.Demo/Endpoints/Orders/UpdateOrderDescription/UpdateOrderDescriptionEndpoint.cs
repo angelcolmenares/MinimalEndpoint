@@ -4,7 +4,7 @@ public class UpdateOrderDescriptionEndpoint :
 EndpointPut<
 UpdateOrdeDescriptionRequest, 
 IResult, 
-IUpdateOrderDescriptionService>, IEndpoint
+IUpdateOrderDescriptionService>
 {
     protected override RequestDelegate RequestHandler => Handle;
 

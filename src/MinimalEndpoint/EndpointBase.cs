@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Routing;
 
 namespace MinimalEndpoint;
 
-public abstract class EndpointBase
+public abstract class EndpointBase: IEndpoint
 {
     private const string RequireAuthorizationKey = "RequireAuthorization";
     protected EndpointBase()

@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace MinimalEndpoint.Demo.Endpoints.Login;
 
-public class LoginEndpoint : EndpointPost, IEndpoint
+public class LoginEndpoint : EndpointPost
 {
     public LoginEndpoint()
     =>

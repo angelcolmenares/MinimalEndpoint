@@ -4,8 +4,7 @@ public class CreateOrderEndpoint :
 EndpointPost<
 CreateOrderRequest, 
 CreateOrderResponse, 
-ICreateOrderService>, 
-IEndpoint
+ICreateOrderService>
 {
     protected override RequestDelegate RequestHandler => Handle;
 

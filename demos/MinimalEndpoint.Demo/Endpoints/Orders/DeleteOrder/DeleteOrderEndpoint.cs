@@ -6,8 +6,7 @@ public class DeleteOrderEndpoint :
  EndpointDelete<
  DeleteOrderRequest, 
  IResult, 
- IDeleteOrderService>,
- IEndpoint
+ IDeleteOrderService>
 {
     protected override RequestDelegate RequestHandler => Handle;
 

@@ -1,5 +1,5 @@
 namespace MinimalEndpoint.Demo.Endpoints.Customers.UpdateCustomerName;
-public class UpdateCustomerNameEndpoint : EndpointPut, IEndpoint
+public class UpdateCustomerNameEndpoint : EndpointPut
 {    
     protected override string ParametersTemplate => "{customerId:int}";
     protected override Delegate Handler => Handle;

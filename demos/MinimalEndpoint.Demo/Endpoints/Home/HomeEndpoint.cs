@@ -1,5 +1,5 @@
 namespace MinimalEndpoint.Demo.Endpoints.Home;
-public class HomeEndpoint : EndpointGet, IEndpoint
+public class HomeEndpoint : EndpointGet
 {
     public HomeEndpoint()=> AllowAnonymous();
     protected override string Pattern => "/";

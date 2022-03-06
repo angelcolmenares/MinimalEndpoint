@@ -1,6 +1,6 @@
 using System.Diagnostics;
 
-public class HealthCheckEndpoint : EndpointGet, IEndpoint
+public class HealthCheckEndpoint : EndpointGet
 {
     public HealthCheckEndpoint()
     {
