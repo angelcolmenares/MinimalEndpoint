@@ -1,6 +1,7 @@
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using MinimalApis.Extensions.Binding;
+using MinimalEndpoint.Demo.Data;
 using MinimalEndpoint.Demo.Endpoints.Orders.GetOrderById;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -27,10 +28,17 @@ builder.Services
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+
+builder.Services.AddScoped<OrdersDbContext>();
 builder.Services.AddOrdersServices();
 
 builder.Services.AddMvcCore();
-var app = builder.Build();
+
+builder.Services.AddServiceLocator();
+
+var app = builder.Build(); 
+
 
 // Configure the HTTP request pipeline.
 
@@ -46,3 +54,4 @@ app.MapGet("test", ( ModelBinder<GetOrderByIdRequest> request)=> request.Model);
 app.MapEndpointsFromCurrentAssembly();
 
 app.Run();
+

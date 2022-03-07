@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\MinimalEndpoint\MinimalEndpoint.csproj" />
+    <ProjectReference Include="..\EasyServiceLocator\EasyServiceLocator.csproj" />
   </ItemGroup>
 
 </Project>

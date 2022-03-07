@@ -1,8 +1,12 @@
 namespace MinimalEndpoint.Demo.Endpoints.Orders.CreateOrder;
 
-public class CreateOrderService : ICreateOrderService
+public class CreateOrderService 
+: OrdersCommandService<CreateOrderRequest, CreateOrderResponse>,
+ICreateOrderService
 {
-    public async Task<CreateOrderResponse> Handle(
+    
+  
+    protected override async Task<CreateOrderResponse> Execute(
         CreateOrderRequest request,
         CancellationToken cancellationToken = default) 
     => 
@@ -11,4 +15,5 @@ public class CreateOrderService : ICreateOrderService
         Id = System.Guid.NewGuid().ToString(),
         Message = $"Order Created: {request.Description}" 
     });
+    
 }
