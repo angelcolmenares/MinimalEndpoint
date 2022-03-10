@@ -1,0 +1,1 @@
+dotnet nuget push ./nugets/*.nupkg -s https://api.nuget.org/v3/index.json -k $(NUGET_KEY_IGNACIO)
