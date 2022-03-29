@@ -5,16 +5,11 @@ using Microsoft.AspNetCore.Routing;
 
 namespace MinimalEndpoint;
 
-public abstract class EndpointBase: IEndpoint
+public abstract class EndpointBase : IEndpoint
 {
     private const string RequireAuthorizationKey = "RequireAuthorization";
     protected EndpointBase()
     {
-        actions.Add(RequireAuthorizationKey, b => b.RequireAuthorization());
-        if (_tagBuilder is not null)
-        {
-            actions["WithTags"] = b => b.WithTags(_tagBuilder.Invoke(GetType(), EndpointsNamespace));
-        }
     }
 
     private Dictionary<string, Action<RouteHandlerBuilder>> actions = new Dictionary<string, Action<RouteHandlerBuilder>>();
@@ -38,6 +33,8 @@ public abstract class EndpointBase: IEndpoint
 
     protected abstract Delegate Handler { get; }
 
+    internal static bool AllowAnonymousByDefault { get; set; } = false;
+
     protected virtual string Pattern =>
      "/"
      + ((_routeBuilder?.Invoke(GetType()) ?? "").Trim('/'))
@@ -59,6 +56,16 @@ public abstract class EndpointBase: IEndpoint
         };
 
         RouteHandlerBuilder?.Invoke(builder);
+        if (!actions.Any(f => f.Key == RequireAuthorizationKey && !AllowAnonymousByDefault))
+        {
+            actions[RequireAuthorizationKey] = b => b.RequireAuthorization();
+        }
+
+        if (_tagBuilder is not null && !actions.Any(f => f.Key == "WithTags"))
+        {
+            actions["WithTags"] = b => b.WithTags(_tagBuilder.Invoke(GetType(), EndpointsNamespace));
+        }
+
         foreach (var (_, action) in actions)
         {
             action.Invoke(builder);

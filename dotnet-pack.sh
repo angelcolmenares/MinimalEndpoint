@@ -1,1 +1,1 @@
-dotnet pack .\src\MinimalEndpoint\MinimalEndpoint.csproj  -c Release -o ./nugets
+dotnet pack ./src/MinimalEndpoint/MinimalEndpoint.csproj  -c Release -o ./nugets

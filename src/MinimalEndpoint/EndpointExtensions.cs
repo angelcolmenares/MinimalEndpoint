@@ -10,10 +10,20 @@ public static class EndpointExtensions
     public static WebApplication MapEndpointsFromCurrentAssembly(
         this WebApplication app,
         string? patternPrefix = null,
-        RouteBuilderDelegate? routeBuilderDelegate = null)
+        RouteBuilderDelegate? routeBuilderDelegate = null,
+        string endpointsNamespace = "Endpoints",
+        TagBuilderDelegate? tagBuilderDelegate = null,
+        bool allowAnonymousbyDefault=false)
     {
         var assembly = Assembly.GetCallingAssembly();
-        return MapEndpointsFromAssembly(app, assembly, patternPrefix, routeBuilderDelegate);
+        return MapEndpointsFromAssembly(
+            app,
+            assembly,
+            patternPrefix,
+            routeBuilderDelegate,
+            endpointsNamespace,
+            tagBuilderDelegate,
+            allowAnonymousbyDefault);
     }
 
     public static WebApplication MapEndpointsFromAssembly(
@@ -22,7 +32,8 @@ public static class EndpointExtensions
         string? patternPrefix = null,
         RouteBuilderDelegate? routeBuilderDelegate = null,
         string endpointsNamespace = "Endpoints",
-        TagBuilderDelegate? tagBuilderDelegate = null)
+        TagBuilderDelegate? tagBuilderDelegate = null,
+        bool allowAnonymousbyDefault=false)
     {
         var normalizedPatternPrefix =
         (!string.IsNullOrEmpty(patternPrefix) ? patternPrefix : "")
@@ -36,6 +47,8 @@ public static class EndpointExtensions
 
         EndpointBase.TagBuilder = (t, ns)
         => (tagBuilderDelegate ?? DefaultTagBuilder.Build).Invoke(t, ns);
+
+        EndpointBase.AllowAnonymousByDefault=allowAnonymousbyDefault;
 
 
         var modules = DiscoverEndpoints(assembly);
