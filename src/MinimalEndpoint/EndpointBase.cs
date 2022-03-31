@@ -56,7 +56,7 @@ public abstract class EndpointBase : IEndpoint
         };
 
         RouteHandlerBuilder?.Invoke(builder);
-        if (!actions.Any(f => f.Key == RequireAuthorizationKey && !AllowAnonymousByDefault))
+        if (!AllowAnonymousByDefault && !actions.Any(f => f.Key == RequireAuthorizationKey)  )
         {
             actions[RequireAuthorizationKey] = b => b.RequireAuthorization();
         }
